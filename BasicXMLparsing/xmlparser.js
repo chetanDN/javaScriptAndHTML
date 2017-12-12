@@ -43,3 +43,4 @@ function PopulateDropDownList() {
                 ddl.options.add(option);
             }
         }
+<!--https://stackoverflow.com/questions/13204165/using-javascript-to-parse-an-xml-file-->
