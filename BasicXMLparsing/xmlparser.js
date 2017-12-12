@@ -1,0 +1,45 @@
+function PopulateDropDownList() {
+            //Build an XML containing Customer records.
+            var xml = "<Customers>";
+            xml += "<Customer>";
+            xml += "<CustomerId>1</CustomerId><Name>John Hammond</Name><Country>United States</Country>";
+            xml += "</Customer>";
+            xml += "<Customer>";
+            xml += "<CustomerId>2</CustomerId><Name>Mudassar Khan</Name><Country>India</Country>";
+            xml += "</Customer>"
+            xml += "<Customer>";
+            xml += "<CustomerId>3</CustomerId><Name>Suzanne Mathews</Name><Country>France</Country>";
+            xml += "</Customer>";
+            xml += "<Customer>";
+            xml += "<CustomerId>4</CustomerId><Name>Robert Schidner</Name><Country>Russia</Country>";
+            xml += "</Customer>";
+            xml += "</Customers>";
+ 
+            var xmlDoc;
+            if (window.DOMParser) {
+                parser = new DOMParser();
+                xmlDoc = parser.parseFromString(xml, "text/xml");
+            }
+            else //For IE
+            {
+                xmlDoc = new ActiveXObject("Microsoft.XMLDOM");
+                xmlDoc.async = false;
+                xmlDoc.loadXML(xml);
+            }
+ 
+            var customers = xmlDoc.getElementsByTagName("Customer");
+            var ddl = document.getElementById("ddlCustomers");
+ 
+            for (var i = 0; i < customers.length; i++) {
+                var option = document.createElement("option");
+ 
+                //Set Customer Name in Text part.
+                option.text = customers[i].getElementsByTagName("Name")[0].textContent;
+ 
+                //Set Customer CustomerId in Value part.
+                option.value = customers[i].getElementsByTagName("CustomerId")[0].textContent;
+ 
+                //Add the Option element to DropDownList.
+                ddl.options.add(option);
+            }
+        }
