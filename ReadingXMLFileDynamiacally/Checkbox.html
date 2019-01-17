@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+   <head>
+      <title>HTML span Tag</title>
+	  
+	  <script>
+	  var openFile = function(event) {
+	  var input = event.target;
+	  var instanceOfFileReader = new FileReader();
+	  instanceOfFileReader.readAsText(input.files[0]);
+	  instanceOfFileReader.onload = function(){
+	  var file = instanceOfFileReader.result;
+	  
+	parser = new DOMParser();
+	xmlDoc = parser.parseFromString(file,"text/xml");
+	  
+	  document.getElementById('myText').innerHTML = xmlDoc.getElementsByTagName("Name")[0].childNodes[0].nodeValue;
+	  };
+	  };
+	  </script>
+   </head>
+
+   <body>
+      <p>This is a paragraph <span style = "color:#FF0000;">This is a paragraph</span>This is a paragraph</p>
+      
+      <p><span style = "color:#8866ff;">This is another paragraph</span></p>
+	  <input type='file' accept='text/xml' onchange='openFile(event)'><br>
+	  <h1>the xml content is :  <span id='myText'></span></h1>
+   </body>
+
+</html>
